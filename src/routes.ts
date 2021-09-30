@@ -1,22 +1,19 @@
 import { Router } from "express";
-import { getCustomRepository } from "typeorm";
 import { SettingsController } from "./controllers/SettingsControllers";
-import { SettingRepository } from './repositories/SettingsRepository';
+import { UsersController } from "./controllers/UsersControllers";
 
 const routes = Router();
 
 const settingsController = new SettingsController()
+const userController = new UsersController()
 
 routes.post('/settings', settingsController.create);
 
-routes.get('/', async (request, response) => {
-   
-    const settingsRepository = getCustomRepository(SettingRepository)
-    
-    const setting = settingsRepository.count()
+routes.get('/settings', settingsController.list)
 
-    return response.status(200).json(setting)
-})
+routes.post('/users', userController.create);
+
+routes.get('/users', userController.list)
 
 
 

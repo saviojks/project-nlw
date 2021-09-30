@@ -23,6 +23,13 @@ class SettingsService{
 
         return setting;
     }
+    async list(){
+        const settingsRepository = getCustomRepository(SettingRepository)
+
+        const setting = await settingsRepository.find()
+
+        return setting;
+    }
 }
 
 export {SettingsService}

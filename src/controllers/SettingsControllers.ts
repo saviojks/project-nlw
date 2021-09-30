@@ -16,6 +16,18 @@ class SettingsController {
            return response.status(409).json({ message: error.message})
        }
     }
+    async list(request: Request, response: Response){
+
+        const settingsService = new SettingsService()
+
+       try {
+        const setting = await settingsService.list()
+            
+        return response.status(200).json(setting)
+       } catch (error) {
+           return response.status(409).json({ message: error.message})
+       }
+    }
 }
 
 export {SettingsController}
