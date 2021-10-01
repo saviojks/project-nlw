@@ -21,6 +21,8 @@ routes.post('/messages', messagesController.create);
 
 routes.get('/messages', messagesController.list)
 
+routes.get('/messages/:user_id', messagesController.showByUser)
+
 
 
 export { routes };

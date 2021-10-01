@@ -16,6 +16,7 @@ class MessagesController {
            return response.status(409).json({ message: error.message})
        }
     }
+    
     async list(request: Request, response: Response){
 
         const messagesService = new MessagesService()
@@ -24,6 +25,19 @@ class MessagesController {
         const message = await messagesService.list()
             
         return response.status(200).json(message)
+       } catch (error) {
+           return response.status(409).json({ message: error.message})
+       }
+    }
+
+    async showByUser(request: Request, response: Response){
+        const { user_id } = request.params
+        const messagesService = new MessagesService()
+
+       try {
+        const list = await messagesService.listByUser(user_id)
+            
+        return response.status(200).json(list)
        } catch (error) {
            return response.status(409).json({ message: error.message})
        }
