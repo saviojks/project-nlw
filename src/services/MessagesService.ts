@@ -1,4 +1,4 @@
-import { getCustomRepository, Repository } from 'typeorm';
+import { getCustomRepository, getMongoManager, Repository, } from 'typeorm';
 import { Message } from '../entities/Message';
 import { MessagesRepository } from '../repositories/MessagesRepository';
 
@@ -35,6 +35,9 @@ class MessagesService{
     }
 
     async listByUser(user_id: string){
+        const mongo = getMongoManager()
+
+        const mlistMongo = mongo.find('users')
 
         const list = await this.messagesRepository.find({
             where: {user_id},
